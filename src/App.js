@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { getArticle } from './services/ksf'
 import './App.css'
 import Element from './components/Element'
+import Image from './components/Image'
 
 const App = () => {
   const [article, setArticle] = useState('')
@@ -9,8 +10,9 @@ const App = () => {
   useEffect(() => {
     getArticle('a6282b95-e620-4040-87d1-731fed85a7d6')
       .then(response => {
-        console.log(response.data.authors)
-        const data = { authors: response.data.authors,
+        console.log(response.data)
+        const data = {
+          authors: response.data.authors,
           body: response.data.body,
           listImage: response.data.listImage,
           mainImage: response.data.mainImage,
@@ -19,6 +21,7 @@ const App = () => {
           tags: response.data.tags,
           title: response.data.title,
           updateTime: response.data.updateTime,
+          publishingTime: response.data.publishingTime,
         }
         setArticle(data)
       })
@@ -26,21 +29,80 @@ const App = () => {
         console.log(error);
       })
   }, [])
-  
-    
-  if(article.body){
-  console.log(article.body)
+
+  const dateFixer = dateStr => {
+    const temp = new Date(dateStr)
+    const newStr = new Intl.DateTimeFormat('default', {day: 'numeric',
+                                                      month: 'numeric',
+                                                      year: 'numeric',
+                                                      hour: 'numeric',
+                                                      minute: 'numeric'}).format(temp)
+    return newStr
   }
+
+  const containerStyle = {
+    display: 'flex',
+    justifyContent: 'center'
+  }
+
+  const mainContainerStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '80%',
+  }
+
+  const h1Style = {
+    backgroundColor: '#f07e26',
+    width: '80%',
+    position: 'fixed',
+    margin: 0,
+  }
+
+  const paraStyle = {
+    color: '#f07e26',
+    fontWeight: 'bold',
+    margin: 0,
+  }
+
+  const h2Style = {
+    margin: '40px 0px 5px 0px',
+  }
+
+  const authorStyle = {
+    textAlign: 'right',
+    color: '#f07e26',
+    margin: 0,
+  }
+
+  const barStyle={
+    display: 'flex',
+    justifyContent: 'space-between',
+  }
+
+  console.log(article)
+
   return (
-    <div className="App">
-      <h1>{article.paper}</h1>
-      <h2>{article.title}</h2>
-      <h4>{article.preamble}</h4>
-      <div>
-      {article.body && 
-        article.body.map((item, idx)  => <Element key={idx} item={item} />)
+
+    <div className="App" style={containerStyle}>
+      {article &&
+        <div style={mainContainerStyle}>
+          <div>
+            <h1 style={h1Style}>{article.paper.toUpperCase()}</h1>
+            <h2 style={h2Style}>{article.title}</h2>
+            <div style={barStyle}>
+            <p style={paraStyle}>{`#${article.tags}`}</p>
+      <p style={authorStyle}>{article.authors[0].byline} <strong>/</strong> {dateFixer(article.publishingTime)} <strong>/</strong> Uppdaterad: {dateFixer(article.updateTime)}</p>
+            </div>
+            <Image item={article.mainImage} />
+            <h4>{article.preamble}</h4>
+          </div>
+          <div>
+            {article.body &&
+              article.body.map((item, idx) => <Element key={idx} item={item} />)
+            }
+          </div>
+        </div>
       }
-      </div>
     </div>
   );
 }

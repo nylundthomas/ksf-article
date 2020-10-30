@@ -1,8 +1,10 @@
 import React from 'react'
+import parse from 'html-react-parser'
 
 const Paragraph = ({ text }) => {
+    
     return (
-    <p>{text}</p>
+    <p>{parse(text)}</p>
     )
 }
 

@@ -2,9 +2,14 @@ import React from 'react'
 import Headline from './Headline'
 import Paragraph from './Paragraph'
 import Image from './Image'
+import Box from './Box'
 
 const Element = ({ item }) => {
-    console.log(item)
+
+    const boxContainer = {
+        display: 'flex',
+        justifyContent: 'center',
+    }
 
     return (
         <div>
@@ -22,7 +27,9 @@ const Element = ({ item }) => {
         }
 
         {item.box &&
-            null
+            <div style={boxContainer}>
+            <Box box={item.box}/>
+            </div>
         }
         </div>
     )
