@@ -12,6 +12,7 @@ const Box = ({ box }) => {
         padding: '5px 0px',
         margin: 0,
         textAlign: 'center',
+        fontFamily: 'Duplex Serfif Web, Roboto',
     }
 
     const containerStyle = {
@@ -34,6 +35,7 @@ const Box = ({ box }) => {
     const titleStyle = {
         margin: '5px 2px',
         fontWeight: 'bold',
+        fontFamily: 'Duplex Serfif Web, Roboto',
     }
 
     const paraStyle = {
