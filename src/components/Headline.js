@@ -5,7 +5,8 @@ const Headline = ({ text }) => {
     const headLineStyle = {
         width: '100%',
         textAlign: 'left',
-        margin: '20px 0px 0px 0px'
+        margin: '20px 0px 0px 0px',
+        fontFamily: 'Duplex Serfif Web, Roboto',
     }
 
     return (

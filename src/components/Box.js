@@ -4,7 +4,7 @@ import parse from 'html-react-parser'
 const Box = ({ box }) => {
     const [btnTxt, setBtnTxt] = useState('Öppna ruta')
     const [faktaContent, setFaktaContent] = useState(null)
-    const { headline, content, title, type } = box
+    const { headline, content, title } = box
 
     const h3Style = {
         backgroundColor: '#f07e26',
@@ -15,6 +15,7 @@ const Box = ({ box }) => {
     }
 
     const containerStyle = {
+        backgroundColor: '#f7f5f3',
         borderLeftStyle: 'dashed',
         borderTopStyle: 'solid',
         borderRightStyle: 'dashed',
@@ -56,7 +57,7 @@ const Box = ({ box }) => {
             <h3 style={h3Style}>{headline.toUpperCase()}</h3>
             <p style={titleStyle}>{title}</p>
             {faktaContent &&
-                content.map(item => <p style={paraStyle}>{parse(item)}</p>)
+                content.map((item, idx) => <p key={idx} style={paraStyle}>{parse(item)}</p>)
             }
             <button onClick={() => handleClick(btnTxt)} style={buttonStyle}>{btnTxt}</button>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Image = ({ item }) => {
-    const { alignment, byline, caption, thumb, url } = item
+    const { byline, caption, url } = item
 
     const imageContainerStyle = {
         display: 'flex',

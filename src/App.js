@@ -32,11 +32,13 @@ const App = () => {
 
   const dateFixer = dateStr => {
     const temp = new Date(dateStr)
-    const newStr = new Intl.DateTimeFormat('default', {day: 'numeric',
-                                                      month: 'numeric',
-                                                      year: 'numeric',
-                                                      hour: 'numeric',
-                                                      minute: 'numeric'}).format(temp)
+    const newStr = new Intl.DateTimeFormat('default', {
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
+    }).format(temp)
     return newStr
   }
 
@@ -53,6 +55,7 @@ const App = () => {
 
   const h1Style = {
     backgroundColor: '#f07e26',
+    fontFamily: 'Duplex Serfif Web, Roboto',
     width: '80%',
     position: 'fixed',
     margin: 0,
@@ -66,6 +69,8 @@ const App = () => {
 
   const h2Style = {
     margin: '40px 0px 5px 0px',
+    fontFamily: 'Duplex Serfif Web, Roboto',
+    fontSize: '2.75rem'
   }
 
   const authorStyle = {
@@ -74,9 +79,15 @@ const App = () => {
     margin: 0,
   }
 
-  const barStyle={
+  const barStyle = {
     display: 'flex',
     justifyContent: 'space-between',
+  }
+
+  const ingressStyle = {
+    fontSize: '1.25rem',
+    lineHeight: '1.2',
+    fontFamily: 'Roboto',
   }
 
   console.log(article)
@@ -90,11 +101,11 @@ const App = () => {
             <h1 style={h1Style}>{article.paper.toUpperCase()}</h1>
             <h2 style={h2Style}>{article.title}</h2>
             <div style={barStyle}>
-            <p style={paraStyle}>{`#${article.tags}`}</p>
-      <p style={authorStyle}>{article.authors[0].byline} <strong>/</strong> {dateFixer(article.publishingTime)} <strong>/</strong> Uppdaterad: {dateFixer(article.updateTime)}</p>
+              <p style={paraStyle}>{`#${article.tags}`}</p>
+              <p style={authorStyle}>{article.authors[0].byline} <strong>/</strong> {dateFixer(article.publishingTime)} <strong>/</strong> Uppdaterad: {dateFixer(article.updateTime)}</p>
             </div>
             <Image item={article.mainImage} />
-            <h4>{article.preamble}</h4>
+            <p style={ingressStyle}>{article.preamble}</p>
           </div>
           <div>
             {article.body &&
